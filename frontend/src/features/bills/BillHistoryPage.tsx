@@ -11,7 +11,6 @@ import {
   List,
   ListItem,
   ListItemText,
-  Divider,
   Paper,
   Grid,
 } from '@mui/material';
@@ -138,17 +137,17 @@ export const BillHistoryPage: React.FC = () => {
         </Typography>
         <Grid container spacing={1}>
           {logs.map((log, index) => (
-            <Grid container item xs={12} key={index} alignItems="center" spacing={1}>
-              <Grid item xs={4}>
+            <Grid container size={{ xs: 12 }} key={index} spacing={1} sx={{ alignItems: 'center' }}>
+              <Grid size={{ xs: 4 }}>
                 <Typography variant="body2" sx={{ fontWeight: 600 }}>{log.field}</Typography>
               </Grid>
-              <Grid item xs={3.5} sx={{ textAlign: 'right', textDecoration: 'line-through', color: 'text.secondary' }}>
+              <Grid size={{ xs: 3.5 }} sx={{ textAlign: 'right', textDecoration: 'line-through', color: 'text.secondary' }}>
                 <Typography variant="body2">{log.oldVal}</Typography>
               </Grid>
-              <Grid item xs={1} sx={{ textAlign: 'center', color: 'primary.main', fontWeight: 700 }}>
+              <Grid size={{ xs: 1 }} sx={{ textAlign: 'center', color: 'primary.main', fontWeight: 700 }}>
                 →
               </Grid>
-              <Grid item xs={3.5} sx={{ fontWeight: 700, color: 'primary.main' }}>
+              <Grid size={{ xs: 3.5 }} sx={{ fontWeight: 700, color: 'primary.main' }}>
                 <Typography variant="body2">{log.newVal}</Typography>
               </Grid>
             </Grid>
@@ -185,7 +184,7 @@ export const BillHistoryPage: React.FC = () => {
         </Card>
       ) : (
         <List sx={{ display: 'flex', flexDirection: 'column', gap: 3, p: 0 }}>
-          {revisions.map((rev, index) => (
+          {revisions.map((rev) => (
             <Paper key={rev._id} variant="outlined" sx={{ p: 3, borderColor: 'divider', borderRadius: 2 }}>
               <ListItem sx={{ p: 0, display: 'block' }}>
                 <ListItemText

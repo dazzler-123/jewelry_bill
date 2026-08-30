@@ -27,7 +27,7 @@ import {
   Save as SaveIcon,
   ArrowBack as ArrowBackIcon,
 } from '@mui/icons-material';
-import { PageHeader, MoneyDisplay, StatusChip } from '../../components/shared';
+import { PageHeader, MoneyDisplay } from '../../components/shared';
 import { useSnackbar } from '../../context/SnackbarContext';
 import { useAuth } from '../../context/AuthContext';
 import {
@@ -73,7 +73,6 @@ export const EditBillPage: React.FC = () => {
   const [saving, setSaving] = useState(false);
   const [invoiceNumber, setInvoiceNumber] = useState('');
   const [customerName, setCustomerName] = useState('');
-  const [customerPhone, setCustomerPhone] = useState('');
   const [billStatus, setBillStatus] = useState('');
 
   // Form inputs
@@ -103,7 +102,6 @@ export const EditBillPage: React.FC = () => {
 
         setInvoiceNumber(data.invoiceNumber);
         setCustomerName(data.customerSnapshot?.name || 'Walk-in');
-        setCustomerPhone(data.customerSnapshot?.phone || '');
         setBillStatus(data.status);
         setIsInterState(data.pricingSnapshot?.igst > 0);
         setNotes(data.notes || '');
@@ -180,57 +178,6 @@ export const EditBillPage: React.FC = () => {
   };
 
   // Live summary computations
-  const getCalculatedItems = () => {
-    return items.map((item) => {
-      const calcInput = {
-        metal: item.metal,
-        purity: item.purity,
-        grossWeight: Number(item.grossWeight) || 0,
-        stoneWeight: Number(item.stoneWeight) || 0,
-        otherWeight: Number(item.otherWeight) || 0,
-        metalRate: Number(item.metalRate) || 0,
-        makingChargeType: item.makingChargeType,
-        makingChargeRate: Number(item.makingChargeRate) || 0,
-        wastageType: item.wastageType,
-        wastageRate: Number(item.wastageRate) || 0,
-        stoneChargeType: item.stoneChargeType,
-        stoneRate: Number(item.stoneRate) || 0,
-        stonePieces: Number(item.stonePieces) || 0,
-        stoneWeightCarats: Number(item.stoneWeightCarats) || 0,
-        otherCharge: Number(item.otherCharge) || 0,
-        discountType: item.discountType,
-        discountRate: Number(item.discountRate) || 0,
-      };
-      const result = calculateInvoiceItem(calcInput, isInterState);
-      return {
-        ...item,
-        netWeight: result.netWeight,
-        finalAmount: result.finalAmount,
-      };
-    });
-  };
-
-  const calculatedItemsList = getCalculatedItems();
-
-  const inputForSummary = calculatedItemsList.map((item) => ({
-    metal: item.metal,
-    purity: item.purity,
-    grossWeight: Number(item.grossWeight) || 0,
-    stoneWeight: Number(item.stoneWeight) || 0,
-    otherWeight: Number(item.otherWeight) || 0,
-    metalRate: Number(item.metalRate) || 0,
-    makingChargeType: item.makingChargeType,
-    makingChargeRate: Number(item.makingChargeRate) || 0,
-    wastageType: item.wastageType,
-    wastageRate: Number(item.wastageRate) || 0,
-    stoneChargeType: item.stoneChargeType as any,
-    stoneRate: item.stoneRate || 0,
-    stonePieces: item.stonePieces || 0,
-    stoneWeightCarats: item.stoneWeightCarats || 0,
-    otherCharge: item.otherCharge || 0,
-    discountType: 'FIXED' as const,
-    discountRate: (Number(item.grossWeight) || 0) * (Number(item.metalRate) || 0) - (item.finalAmount || 0) > 0 ? 0 : 0, // placeholder
-  }));
 
   // Re-calculate invoice summary on-the-fly
   const invoiceSummary = calculateInvoiceSummary({

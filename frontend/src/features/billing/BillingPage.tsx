@@ -30,7 +30,6 @@ import {
 import {
   Add as AddIcon,
   Delete as DeleteIcon,
-  Receipt as ReceiptIcon,
   ShoppingBag as ShoppingBagIcon,
   Person as PersonIcon,
   QrCodeScanner as ScannerIcon,
@@ -564,7 +563,7 @@ export const BillingPage: React.FC = () => {
           stoneWeight: item.stoneWeight || 0,
           otherWeight: item.otherWeight || 0,
           metalRate,
-          makingChargeType: item.makingCharge !== undefined ? 'PER_GRAM' : 'NONE',
+          makingChargeType: item.makingCharge !== undefined ? 'PER_GRAM' : 'FIXED',
           makingChargeRate: item.makingCharge || 0,
           wastageType: item.wastage !== undefined ? 'PERCENTAGE' : 'NONE',
           wastageRate: item.wastage || 0,

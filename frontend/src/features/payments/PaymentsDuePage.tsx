@@ -15,7 +15,6 @@ import {
   MenuItem,
   IconButton,
   Tooltip,
-  Alert,
   CircularProgress,
   List,
   ListItem,
@@ -616,8 +615,8 @@ export const PaymentsDuePage: React.FC = () => {
                 slotProps={{
                   input: {
                     startAdornment: <InputAdornment position="start">₹</InputAdornment>,
-                    htmlInput: { min: 0.1, max: selectedBill.paymentSummary.outstandingAmount, step: 'any' },
                   },
+                  htmlInput: { min: 0.1, max: selectedBill.paymentSummary.outstandingAmount, step: 'any' },
                 }}
               />
 
@@ -850,9 +849,9 @@ export const PaymentsDuePage: React.FC = () => {
       <ConfirmDialog
         open={reversalConfirmOpen}
         title="Confirm Payment Reversal"
-        content="Are you sure you want to reverse and void this payment? This is an immutable operation. The transaction remains logged but marked as failed, and the payment amount will be added back onto the bill's outstanding balance."
-        confirmText="Confirm Reversal"
-        color="error"
+        message="Are you sure you want to reverse and void this payment? This is an immutable operation. The transaction remains logged but marked as failed, and the payment amount will be added back onto the bill's outstanding balance."
+        confirmLabel="Confirm Reversal"
+        severity="error"
         onConfirm={handleReversePayment}
         onCancel={() => setReversalConfirmOpen(false)}
       />

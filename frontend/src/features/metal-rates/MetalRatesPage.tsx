@@ -313,7 +313,7 @@ export const MetalRatesPage: React.FC = () => {
       field: 'updatedBy',
       headerName: 'Updated By',
       width: 200,
-      valueGetter: (value) => value?.name || 'System',
+      valueGetter: (value: any) => value?.name || 'System',
     },
     {
       field: 'actions',
@@ -583,9 +583,9 @@ export const MetalRatesPage: React.FC = () => {
       <ConfirmDialog
         open={confirmOpen}
         title="Delete Metal Rate Entry"
-        content="Are you sure you want to permanently delete this metal rate configuration? Past invoices using this snapshot rate will not be affected, but calculations going forward will use other matching active rates."
-        confirmText="Confirm Delete"
-        color="error"
+        message="Are you sure you want to permanently delete this metal rate configuration? Past invoices using this snapshot rate will not be affected, but calculations going forward will use other matching active rates."
+        confirmLabel="Confirm Delete"
+        severity="error"
         onConfirm={handleDelete}
         onCancel={() => setConfirmOpen(false)}
       />

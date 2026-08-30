@@ -39,7 +39,6 @@ import {
   FilterPanel,
   MoneyDisplay,
   DateDisplay,
-  ConfirmDialog,
 } from '../../components/shared';
 import { useSnackbar } from '../../context/SnackbarContext';
 import { useAuth } from '../../context/AuthContext';
@@ -180,7 +179,7 @@ export const BillsPage: React.FC = () => {
   };
 
   // Handle Return checkbox toggle
-  const handleItemCheckboxToggle = (itemId: string, itemValue: number) => {
+  const handleItemCheckboxToggle = (itemId: string) => {
     const isChecked = selectedItemIds.includes(itemId);
     const updated = isChecked
       ? selectedItemIds.filter((id) => id !== itemId)
@@ -497,7 +496,7 @@ export const BillsPage: React.FC = () => {
                         control={
                           <Checkbox
                             checked={checked}
-                            onChange={() => handleItemCheckboxToggle(itemId, item.finalAmount)}
+                            onChange={() => handleItemCheckboxToggle(itemId)}
                           />
                         }
                         label={

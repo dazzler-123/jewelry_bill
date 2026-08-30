@@ -26,7 +26,6 @@ import CustomersPage from './features/customers/CustomersPage';
 import CustomerProfilePage from './features/customers/CustomerProfilePage';
 import ProductsPage from './features/products/ProductsPage';
 import InventoryPage from './features/inventory/InventoryPage';
-import PaymentsPage from './features/payments/PaymentsPage';
 import PaymentsDuePage from './features/payments/PaymentsDuePage';
 import MetalRatesPage from './features/metal-rates/MetalRatesPage';
 import ReportsPage from './features/reports/ReportsPage';

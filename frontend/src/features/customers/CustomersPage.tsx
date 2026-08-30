@@ -169,7 +169,8 @@ export const CustomersPage: React.FC = () => {
     {
       field: 'name',
       headerName: 'Customer',
-      width: 220,
+      minWidth: 180,
+      flex: 1,
       renderCell: (params) => (
         <Box sx={{ py: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '100%' }}>
           <Typography variant="body2" sx={{ fontWeight: 600 }}>
@@ -181,11 +182,12 @@ export const CustomersPage: React.FC = () => {
         </Box>
       ),
     },
-    { field: 'phone', headerName: 'Phone', width: 140 },
+    { field: 'phone', headerName: 'Phone', minWidth: 120, flex: 0.6 },
     {
       field: 'totalPurchases',
       headerName: 'Total Purchases',
-      width: 150,
+      minWidth: 130,
+      flex: 0.7,
       align: 'right',
       headerAlign: 'right',
       valueGetter: (_, row) => row.financials?.totalPurchase || 0,
@@ -198,7 +200,8 @@ export const CustomersPage: React.FC = () => {
     {
       field: 'totalPaid',
       headerName: 'Paid',
-      width: 140,
+      minWidth: 120,
+      flex: 0.6,
       align: 'right',
       headerAlign: 'right',
       valueGetter: (_, row) => row.financials?.totalPaid || 0,
@@ -211,7 +214,8 @@ export const CustomersPage: React.FC = () => {
     {
       field: 'outstanding',
       headerName: 'Outstanding',
-      width: 155,
+      minWidth: 130,
+      flex: 0.7,
       align: 'right',
       headerAlign: 'right',
       valueGetter: (_, row) => row.financials?.outstanding || 0,
@@ -227,7 +231,8 @@ export const CustomersPage: React.FC = () => {
     {
       field: 'lastPurchase',
       headerName: 'Last Purchase',
-      width: 160,
+      minWidth: 130,
+      flex: 0.7,
       valueGetter: (_, row) => row.financials?.lastPurchase || null,
       renderCell: (params) => {
         if (!params.value) return <Typography variant="caption" color="text.secondary">Never</Typography>;
@@ -237,7 +242,8 @@ export const CustomersPage: React.FC = () => {
     {
       field: 'actions',
       headerName: 'Actions',
-      width: 150,
+      minWidth: 120,
+      flex: 0.6,
       sortable: false,
       renderCell: (params) => {
         const id = params.row._id || params.row.id;
@@ -289,7 +295,7 @@ export const CustomersPage: React.FC = () => {
 
       {/* Directory Data Grid */}
       <Card sx={{ boxShadow: '0 4px 20px rgba(0,0,0,0.04)' }}>
-        <CardContent sx={{ p: 3 }}>
+        <CardContent sx={{ p: { xs: 1, sm: 2, md: 3 }, '&:last-child': { pb: { xs: 1, sm: 2, md: 3 } } }}>
           <DataTable
             rows={customers.map((c) => ({
               ...c,

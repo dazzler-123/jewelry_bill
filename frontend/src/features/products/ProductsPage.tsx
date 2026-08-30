@@ -269,28 +269,31 @@ export const ProductsPage: React.FC = () => {
   };
 
   const columns: GridColDef<ProductRow>[] = [
-    { field: 'sku', headerName: 'SKU Code', width: 140, sortable: true },
-    { field: 'barcode', headerName: 'Barcode', width: 140, sortable: true },
-    { field: 'name', headerName: 'Product Name', width: 220, sortable: true },
-    { field: 'category', headerName: 'Category', width: 120, sortable: true },
-    { field: 'metal', headerName: 'Metal', width: 100, sortable: true },
-    { field: 'purity', headerName: 'Purity', width: 90, sortable: true },
+    { field: 'sku', headerName: 'SKU Code', minWidth: 110, flex: 0.6, sortable: true },
+    { field: 'barcode', headerName: 'Barcode', minWidth: 110, flex: 0.6, sortable: true },
+    { field: 'name', headerName: 'Product Name', minWidth: 180, flex: 1, sortable: true },
+    { field: 'category', headerName: 'Category', minWidth: 100, flex: 0.5, sortable: true },
+    { field: 'metal', headerName: 'Metal', minWidth: 80, flex: 0.4, sortable: true },
+    { field: 'purity', headerName: 'Purity', minWidth: 70, flex: 0.4, sortable: true },
     {
       field: 'defaultMakingCharge',
       headerName: 'Making Charge',
-      width: 140,
+      minWidth: 120,
+      flex: 0.6,
       valueFormatter: (value) => `₹${Number(value || 0).toLocaleString('en-IN')}/g`,
     },
     {
       field: 'defaultWastage',
       headerName: 'Wastage',
-      width: 110,
+      minWidth: 90,
+      flex: 0.4,
       valueFormatter: (value) => `${value || 0}%`,
     },
     {
       field: 'active',
       headerName: 'Status',
-      width: 130,
+      minWidth: 120,
+      flex: 0.5,
       renderCell: (params) => (
         <FormControlLabel
           control={
@@ -311,13 +314,15 @@ export const ProductsPage: React.FC = () => {
     {
       field: 'createdAt',
       headerName: 'Configured On',
-      width: 150,
+      minWidth: 120,
+      flex: 0.6,
       renderCell: (params) => <DateDisplay date={params.value as string} />,
     },
     {
       field: 'actions',
       headerName: 'Actions',
-      width: 110,
+      minWidth: 100,
+      flex: 0.5,
       sortable: false,
       renderCell: (params) => (
         <Button
@@ -339,7 +344,7 @@ export const ProductsPage: React.FC = () => {
         title="Products Catalog"
         subtitle="Manage jewelry designs, codes, wastage configurations and categories"
         action={
-          <Box sx={{ display: 'flex', gap: 1.5 }}>
+          <Box sx={{ display: 'flex', gap: 1.5, flexWrap: 'wrap' }}>
             <IconButton onClick={fetchProducts} color="inherit">
               <RefreshIcon />
             </IconButton>
@@ -373,7 +378,7 @@ export const ProductsPage: React.FC = () => {
       </Box>
 
       <Card sx={{ boxShadow: '0 4px 20px rgba(0,0,0,0.04)' }}>
-        <CardContent sx={{ p: 0 }}>
+        <CardContent sx={{ p: { xs: 0, sm: 0 }, '&:last-child': { pb: 0 } }}>
           <DataTable
             rows={products}
             columns={columns}

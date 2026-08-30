@@ -21,10 +21,13 @@ export const DataTable: React.FC<DataTableProps> = ({
     <Box
       sx={{
         width: '100%',
-        height: 480,
+        maxWidth: '100%',
+        overflowX: 'auto',
+        WebkitOverflowScrolling: 'touch',
         '& .MuiDataGrid-root': {
           border: 'none',
           fontFamily: 'inherit',
+          minWidth: 600,
         },
         '& .MuiDataGrid-columnHeaders': {
           backgroundColor: '#FAF9F6',
@@ -34,22 +37,27 @@ export const DataTable: React.FC<DataTableProps> = ({
         '& .MuiDataGrid-cell': {
           borderBottom: '1px solid',
           borderColor: 'divider',
-          fontSize: '0.825rem',
+          fontSize: { xs: '0.75rem', sm: '0.825rem' },
         },
         '& .MuiDataGrid-footerContainer': {
           borderTop: '1px solid',
           borderColor: 'divider',
         },
+        '& .MuiDataGrid-virtualScroller': {
+          minHeight: 200,
+        },
       }}
     >
       <DataGrid
         loading={loading}
+        autoHeight
         slots={{
           loadingOverlay: () => <LoadingState message="Fetching records..." />,
           noRowsOverlay: () => <EmptyState title={emptyTitle} description={emptyDescription} />,
         }}
         disableRowSelectionOnClick
         density="compact"
+        pageSizeOptions={[10, 25, 50]}
         {...props}
       />
     </Box>

@@ -186,10 +186,12 @@ export const AppShell: React.FC = () => {
           minHeight: '100vh',
           display: 'flex',
           flexDirection: 'column',
+          minWidth: 0,
+          overflowX: 'hidden',
         }}
       >
         <Toolbar />
-        <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+        <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', minWidth: 0 }}>
           <Outlet />
         </Box>
       </Box>

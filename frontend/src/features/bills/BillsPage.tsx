@@ -263,11 +263,12 @@ export const BillsPage: React.FC = () => {
   };
 
   const columns: GridColDef<BillRow>[] = [
-    { field: 'invoiceNumber', headerName: 'Invoice No.', width: 130, sortable: true },
+    { field: 'invoiceNumber', headerName: 'Invoice No.', minWidth: 110, flex: 0.6, sortable: true },
     {
       field: 'customerName',
       headerName: 'Customer Name',
-      width: 180,
+      minWidth: 150,
+      flex: 1,
       valueGetter: (_, row) => row.customerSnapshot?.name || 'Walk-in',
       renderCell: (params) => (
         <Box sx={{ py: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '100%' }}>
@@ -279,13 +280,15 @@ export const BillsPage: React.FC = () => {
     {
       field: 'createdAt',
       headerName: 'Invoice Date',
-      width: 140,
+      minWidth: 120,
+      flex: 0.7,
       renderCell: (params) => <DateDisplay date={params.value as string} includeTime />,
     },
     {
       field: 'total',
       headerName: 'Total Value',
-      width: 140,
+      minWidth: 120,
+      flex: 0.7,
       align: 'right',
       headerAlign: 'right',
       valueGetter: (_, row) => row.pricingSnapshot?.finalAmount || 0,
@@ -294,7 +297,8 @@ export const BillsPage: React.FC = () => {
     {
       field: 'due',
       headerName: 'Outstanding Due',
-      width: 140,
+      minWidth: 120,
+      flex: 0.7,
       align: 'right',
       headerAlign: 'right',
       valueGetter: (_, row) => row.paymentSummary?.outstandingAmount || 0,
@@ -307,7 +311,8 @@ export const BillsPage: React.FC = () => {
     {
       field: 'status',
       headerName: 'Status',
-      width: 130,
+      minWidth: 110,
+      flex: 0.5,
       align: 'center',
       headerAlign: 'center',
       renderCell: (params) => <StatusChip status={params.value as string} />,
@@ -315,7 +320,8 @@ export const BillsPage: React.FC = () => {
     {
       field: 'actions',
       headerName: 'Actions',
-      width: 190,
+      minWidth: 160,
+      flex: 0.8,
       sortable: false,
       renderCell: (params) => {
         const bill = params.row;
@@ -383,8 +389,8 @@ export const BillsPage: React.FC = () => {
       <PageHeader title="Bills History Log" subtitle="Audit all invoices, process returns, view revisions ledger and cancel invoices" />
 
       <Card sx={{ mb: 3 }}>
-        <CardContent sx={{ p: 2, '&:last-child': { pb: 2 } }}>
-          <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
+        <CardContent sx={{ p: { xs: 1.5, sm: 2 }, '&:last-child': { pb: { xs: 1.5, sm: 2 } } }}>
+          <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, gap: { xs: 1, sm: 2 }, alignItems: { sm: 'center' } }}>
             <SearchInput
               value={searchQuery}
               onChange={setSearchQuery}
@@ -395,7 +401,7 @@ export const BillsPage: React.FC = () => {
               variant="outlined"
               color="inherit"
               onClick={() => setFilterOpen(true)}
-              sx={{ height: 40 }}
+              sx={{ height: 40, minWidth: 'fit-content', flexShrink: 0 }}
             >
               Filters
             </Button>
@@ -404,7 +410,7 @@ export const BillsPage: React.FC = () => {
       </Card>
 
       <Card sx={{ boxShadow: '0 4px 20px rgba(0,0,0,0.04)' }}>
-        <CardContent sx={{ p: 0 }}>
+        <CardContent sx={{ p: { xs: 0, sm: 0 }, '&:last-child': { pb: 0 } }}>
           <DataTable
             rows={filteredBills.map((b) => ({
               ...b,

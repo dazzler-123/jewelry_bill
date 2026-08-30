@@ -9,9 +9,9 @@ async function bootstrap() {
       'https://frontend-five-rho-63.vercel.app',
       'http://localhost:5173',
     ],
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Accept', 'Authorization'],
     credentials: true,
-    allowedHeaders: 'Content-Type, Accept, Authorization',
   });
   await app.listen(process.env.PORT ?? 3000, '0.0.0.0');
 }

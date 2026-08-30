@@ -39,10 +39,20 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
+  // Only intercept GET requests (POST/PUT/DELETE/OPTIONS should go straight to network)
+  if (event.request.method !== 'GET') {
+    return;
+  }
+
   const requestUrl = new URL(event.request.url);
 
-  // Exclude API requests from cache
-  if (requestUrl.pathname.startsWith('/api') || requestUrl.port === '3000') {
+  // Exclude API requests and cross-origin requests from cache
+  if (
+    requestUrl.origin !== self.location.origin ||
+    requestUrl.pathname.startsWith('/api') ||
+    requestUrl.pathname.startsWith('/auth') ||
+    requestUrl.port === '3000'
+  ) {
     return;
   }
 
@@ -72,11 +82,13 @@ self.addEventListener('fetch', (event) => {
           });
         }
         return response;
-      }).catch(() => {
+      }).catch((err) => {
         // Fallback offline experience
         if (event.request.mode === 'navigate') {
           return caches.match('/index.html');
         }
+        // Propagate network errors instead of resolving to undefined and causing TypeError
+        throw err;
       });
     })
   );

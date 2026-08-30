@@ -197,7 +197,7 @@ export const SettingsPage: React.FC = () => {
       {/* Tabs list bar */}
       <Card sx={{ mb: 3 }}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider', px: 2 }}>
-          <Tabs value={activeTab} onChange={(_, val) => setActiveTab(val)}>
+          <Tabs value={activeTab} onChange={(_, val) => setActiveTab(val)} variant="scrollable" scrollButtons="auto">
             <Tab label="Shop Profile Details" />
             <Tab label="Invoice Formats Settings" />
             <Tab label="GST Tax Rates Settings" />

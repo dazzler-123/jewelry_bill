@@ -478,7 +478,7 @@ export const CustomerProfilePage: React.FC = () => {
           {/* History ledger Tabs panels container */}
           <Card variant="outlined" sx={{ boxShadow: '0 4px 20px rgba(0,0,0,0.02)' }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider', px: 2, pt: 1 }}>
-              <Tabs value={activeTab} onChange={(_, val) => setActiveTab(val)}>
+              <Tabs value={activeTab} onChange={(_, val) => setActiveTab(val)} variant="scrollable" scrollButtons="auto">
                 <Tab label="Purchase History" icon={<ReceiptIcon sx={{ fontSize: 16 }} />} iconPosition="start" />
                 <Tab label="Payment History" icon={<PaymentsIcon sx={{ fontSize: 16 }} />} iconPosition="start" />
                 <Tab label={`Due Bills (${dueBills.length})`} icon={<WarningIcon sx={{ fontSize: 16 }} />} iconPosition="start" />

@@ -312,7 +312,7 @@ export const ReportsPage: React.FC = () => {
       {/* Report tabs controls panel (Hidden during print) */}
       <Card className="no-print" sx={{ mb: 3.5 }}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider', px: 2, pt: 1 }}>
-          <Tabs value={activeTab} onChange={(_, val) => { setActiveTab(val); setPage(1); }}>
+          <Tabs value={activeTab} onChange={(_, val) => { setActiveTab(val); setPage(1); }} variant="scrollable" scrollButtons="auto">
             <Tab label="Sales Journal" icon={<SalesIcon sx={{ fontSize: 16 }} />} iconPosition="start" />
             <Tab label="Metal Weights" icon={<MetalIcon sx={{ fontSize: 16 }} />} iconPosition="start" />
             <Tab label="Payments Audit" icon={<PaymentIcon sx={{ fontSize: 16 }} />} iconPosition="start" />
